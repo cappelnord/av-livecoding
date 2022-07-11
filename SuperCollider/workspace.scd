@@ -62,7 +62,7 @@ TempoClock.default.tempo = ~t;
 		steps.do {|i|
 			var norm = (i+1) / steps;
 			audioAmp = norm.linlin(0, 1, start, target);
-			net.sendMsg("/amp", audioAmp);
+			net.sendMsg("/audio", audioAmp);
 			(1/fps).wait;
 		};
 	}.fork;

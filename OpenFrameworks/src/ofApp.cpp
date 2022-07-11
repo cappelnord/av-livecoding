@@ -60,7 +60,7 @@ void ofApp::receiveOSC() {
         ofxOscMessage m;
         receiver.getNextMessage(&m);
         
-        if (m.getAddress() == "/amp") {
+        if (m.getAddress() == "/audio") {
             audioAmplification = m.getArgAsFloat(0);
         }
         
