@@ -1,14 +1,20 @@
 // These are just some old tests .. feel free to explore them (or not)
 // Some of them might already be broken ...
 
+Ndef(\imp_test, {RLPF.ar(LFSaw.ar(~r * [4, 3, 5, 2, 1.5] * 0.25  + [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4]
+	* XLine.kr(1, 5, 60)),XLine.kr(~r, ~r*20, 10), 0.15)} * 0.2).play
+
+Ndef(\imp_test).fadeTime = 10
+
+Ndef(\imp_test).clear
 (
 Ndef(\bars).quant = 4;
 Ndef(\bars, {
 	var sig = 7.collect {
-		LFPulse.ar(~r * [1, 2, 3, 4].choose + Line.kr(0, [0, -8, 8, -4, 4].choose * 4, 1), 0, 0.03);
+		Impulse.ar(~r * [1, 2, 3, 4].choose + Line.kr(0, [0, -8, 8, -4, 4].choose * 4, 1), 0, 0.03);
 	};
 
-	sig = RLPF.ar(sig, SinOsc.kr(0.1 + {0.5.rand}!7).range(50, 5000), 0.4);
+	sig = RLPF.ar(sig, SinOsc.kr(0.1 + {0.5.rand}!7).range(50, 500), 0.4);
 
 	sig = FbC({|fb| PitchShift.ar(fb, 0.2, 1.5) + sig * 0.6}, 0.25, ~l * 8);
 
@@ -17,6 +23,10 @@ Ndef(\bars, {
 Ndef(\bars).fadeTime=8;
 )
 
+Ndef(\bars).play
+
+Ndef(\bars).clear
+NdefMixer()
 (
 Ndef(\bla, {
 	var sig = 7.collect {
@@ -118,6 +128,8 @@ Ndef(\imp).quant = 4;
 Ndef(\imp).fadeTime = 4
 )
 
+Ndef(\imp).clear
+
 
 ( //@ sd #0#
 SynthDef(\pling, {|out=0, freq=440, amp=0.1, pan=0|
@@ -139,19 +151,19 @@ Pdef(\test, Pbind(
 	\instrument, [\pling, \pling, \pling]!!inf,
 	\freq, Pseq([-12,24,0, [12, -24, 0, 12, 29], 0] + 48, inf).collect(~just),
 	\strum, 0.125,
-	\out, Pseq((0..6), inf),
+	\out, Prand((0..6), inf),
 	\amp, [0.2, 0.2]
 )).play;
 )
 
 (
 Pdef(\test2, Pbind(
-	\dur, [0.25, 0.5]!!inf * 2.25,
+	\dur, [0.25, 0.5, 0.125]!!inf * 2.25,
 	\instrument, [\pling, \pling, \pling]!!inf,
 	\freq, Pseq([0,0,0, 12, -12] + 60, inf).collect(~just),
 	\strum, 0.25,
-	\out, Pseq((0..6), inf),
-	\amp, 0.0
+	\out, Prand((0..6), inf),
+	\amp, 0.025
 )).play;
 )
 
@@ -161,7 +173,7 @@ Pdef(\test3, Pbind(
 	\instrument, [\pling, \pling, \pling]!!inf,
 	\freq, Pseq([0,7,7,1, 2,3,4,12, 24, [0, 7], 0, 0] + 72, inf).collect(~just),
 	\strum, 0.25,
-	\out, Pseq((0..6), inf),
+	\out, Prand((0..6), inf),
 	\amp, 0.05
 )).play
 )
@@ -213,7 +225,7 @@ Pdef(\gli, Pbind(
 	\len, [0.1, 0.1, 2]!!inf,
 	\out, Prand((0..6), inf),
 	\amp, [1, 1, 0, 1, 0]!!inf * 0.2
-)).stop;
+)).play;
 )
 
 (
@@ -224,7 +236,7 @@ Pdef(\gl2, Pbind(
 	\len, [0.1, 0.1, 2, 4]!!inf,
 	\out, Prand((0..6), inf),
 	\amp, [1, 1, 0, 1, 0, 1, 0.125]!!inf * 0.2
-)).stop;
+)).play;
 )
 
 Ndef(\mix, {
