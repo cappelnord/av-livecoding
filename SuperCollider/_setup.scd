@@ -5,11 +5,27 @@ var deviceName = "UltraLite-Patrick";
 s.options.outDevice = deviceName;
 s.options.inDevice = deviceName;
 s.options.sampleRate = 48000;
-s.options.numOutputBusChannels = 10;
-s.options.numInputBusChannels = 10;
+s.options.numOutputBusChannels = 16;
+s.options.numInputBusChannels = 8;
 )
 
 s.reboot;
+
+
+// Delay of 8-Channel Audio
+(
+var delayFunc = {
+	var delayTime = 0.125;
+	{
+		var sig = SoundIn.ar([0, 1, 2, 3, 4, 5, 6, 7]) * Line.ar(0, 1, 3);
+		sig = DelayC.ar(sig, delayTime, delayTime);
+		Out.ar(8, sig);
+	}.play;
+};
+delayFunc.value;
+CmdPeriod.add(delayFunc);
+)
+
 
 // I used a Motu Ultralite as audio interface, sending 7 channels to the
 // audio interface, the audio interface interlan mixing DSP then did a
@@ -21,8 +37,9 @@ s.reboot;
 // (using Splay). I leave this here as an exercise but in case somebody struggles
 // with this get in touch!
 
-// Delay
+// Delay of Stereo Mix
 (
+/*
 var delayFunc = {
 	var delayTime = 0.125;
 	{
@@ -33,4 +50,11 @@ var delayFunc = {
 };
 delayFunc.value;
 CmdPeriod.add(delayFunc);
+*/
 )
+
+
+
+().play
+
+s.meter
