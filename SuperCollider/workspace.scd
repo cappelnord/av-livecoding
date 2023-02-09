@@ -99,7 +99,7 @@ Ndef(\bar, {
 		LFPulse.ar(~r, 0.9, 0.1);
 	};
 
-	LPF.ar(sig, 200);
+	LPF.ar(sig, 200) * 0.5;
 }).play;
 )
 
