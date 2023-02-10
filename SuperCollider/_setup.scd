@@ -15,7 +15,7 @@ s.reboot;
 // Delay of 8-Channel Audio
 (
 var delayFunc = {
-	var delayTime = 0.125;
+	var delayTime = 0.09;
 	{
 		var sig = SoundIn.ar([0, 1, 2, 3, 4, 5, 6, 7]) * Line.ar(0, 1, 3);
 		sig = DelayC.ar(sig, delayTime, delayTime);
