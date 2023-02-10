@@ -96,7 +96,8 @@ Ndef(\bar).quant = 1;
 Ndef(\bar).fadeTime = 4;
 Ndef(\bar, {
 	var sig = 7.collect {
-		LFPulse.ar(~r, 0.9, 0.1);
+		var chan = LFPulse.ar(~r, 0.9, 0.1);
+		chan;
 	};
 
 	LPF.ar(sig, 200) * 0.5;
@@ -104,5 +105,23 @@ Ndef(\bar, {
 )
 
 
+( //@ sd pling
+SynthDef(\pling, {|out=0, freq=440, amp=0.1, pan=0, len=0.1|
 
+	var sig = SinOsc.ar(freq);
+	var env = EnvGen.ar(Env.perc(0.001, len, 1, -4), doneAction:2);
+	sig = sig * env;
 
+	OffsetOut.ar(out, sig * amp);
+}).add;
+)
+
+(
+Pdef(\pling, Pbind(
+	\dur, 1,
+	\instrument, [\pling]!!inf,
+	\freq, Pseq([0, 12] + 48, inf).collect(~just),
+	\out, Prand((0..6), inf),
+	\amp, 0.0
+)).play
+)
