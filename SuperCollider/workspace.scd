@@ -89,16 +89,24 @@ TempoClock.default.tempo = ~t;
 // push the audio brightness A LOT
 ~audioFade.value(3, 10);
 
+(
+Ndef(\fmul).quant = 1;
+Ndef(\fmul).fadeTime = 8;
+Ndef(\fmul, {
+	7.collect {
+		1;
+	}
+});
+)
 
 (
 Ndef(\bar).quant = 1;
 Ndef(\bar).fadeTime = 8;
 Ndef(\bar, {
-	var sig = 7.collect {
-		var chan = LFPulse.ar(~r, 0.5, 0.2);
+	var sig = 7.collect {|i|
+		var chan = LFPulse.ar(~r , 0.5, 0.2);
 		chan;
 	};
-
 	LPF.ar(sig, 200) * 0.5;
 }).play;
 )
