@@ -26,6 +26,25 @@ delayFunc.value;
 CmdPeriod.add(delayFunc);
 )
 
+// Test Audio (and Delay)
+(
+(
+Ndef(\test).quant = 1;
+Ndef(\test).fadeTime = 1;
+Ndef(\test, {
+	var sig = 7.collect {|i|
+		var chan = WhiteNoise.ar() * Lag2.ar(LFPulse.ar(0.25, (7-i) * (1/7), 0.01), 0.001);
+		chan;
+	};
+	sig;
+}).play;
+)
+)
+
+Ndef(\test).clear
+
+s.meter
+
 
 // I used a Motu Ultralite as audio interface, sending 7 channels to the
 // audio interface, the audio interface interlan mixing DSP then did a
