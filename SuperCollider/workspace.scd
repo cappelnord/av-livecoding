@@ -119,6 +119,8 @@ Ndef(\mix, {
 
 	var sig = bar;
 
-	LPF.ar(sig, 200) * 0.5;
+	sig = LPF.ar(sig, 200) * 0.5;
+
+	LeakDC.ar(sig);
 }).play;
 )
