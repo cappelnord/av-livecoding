@@ -87,7 +87,7 @@ TempoClock.default.tempo = ~t;
 ~screenFade.value(0.75, 6);
 
 // push the audio brightness A LOT
-~audioFade.value(3, 10);
+~audioFade.value(2, 10);
 
 (
 Ndef(\fmul).quant = 1;
