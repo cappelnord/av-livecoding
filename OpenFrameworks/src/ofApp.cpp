@@ -24,26 +24,29 @@ void ofApp::setup(){
     soundStreamSettings.bufferSize = audioBufferSize;
     soundStreamSettings.sampleRate = audioSamplerate;
     soundStreamSettings.setInListener(this);
-
-    
     soundStream.setup(soundStreamSettings);
-
-
-    grabber.listDevices();
+    
+    
+    string videoDeviceName = "OBS Virtual Camera";
+    vector<ofVideoDevice> videoDevices = grabber.listDevices();
+            
+    for(vector<ofVideoDevice>::iterator it = videoDevices.begin(); it != videoDevices.end(); ++it) {
+        if(it->deviceName == videoDeviceName) {
+            grabber.setDeviceID(it->id);
+            break;
+        }
+    }
     
     // I use a OBS Virtual camera here to record my screen and pass
     // to this OpenFrameworks app. I was sad, that this was not possible
     // with Syphon (on Mac) at the moment!
-    
-    // Check which is the device ID that you want to display!
-    printf("Assuming Webcam Device ID 1!\n");
-    grabber.setDeviceID(1);
-    
+
     grabber.initGrabber(videoGrabberWidth, videoGrabberHeight);
-    
     shader.load("lcav-screen");
     
-    plane.set(ofGetWidth(), audioBufferSize);
+    // plane.set(ofGetWidth(), audioBufferSize);
+    plane.set(ofGetWidth(), ofGetHeight());
+
     
     plane.setPosition({ofGetWidth()/2, ofGetHeight()/2, 0.0f});
     
@@ -99,7 +102,7 @@ void ofApp::draw(){
     shader.setUniformTexture("audioTex", audioTexture, 0);
     shader.setUniformTexture("grabberTex",  grabber.getTexture(), 1);
 
-    shader.setUniform2f("windowDimensions", ofGetWidth(), audioBufferSize);
+    shader.setUniform2f("windowDimensions", ofGetWidth(), ofGetHeight());
     shader.setUniform2f("grabberDimensions", videoGrabberWidth, videoGrabberHeight);
     shader.setUniform2f("audioDimensions", audioNumChannels, audioBufferSize);
     
