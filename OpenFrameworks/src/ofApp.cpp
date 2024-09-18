@@ -117,7 +117,8 @@ void ofApp::audioIn (ofSoundBuffer &buffer){
     vector<float> rawBuffer = buffer.getBuffer();
     
     mutex.lock();
-    audioPixels.setFromExternalPixels(rawBuffer.data(), audioNumChannels, audioBufferSize, 1);
+    memcpy(audioArray, rawBuffer.data(), audioArraySize * sizeof(float));
+    audioPixels.setFromExternalPixels(audioArray, audioNumChannels, audioBufferSize, 1);
     mutex.unlock();
 }
 

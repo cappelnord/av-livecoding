@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOsc.h"
+#include <ofxOsc.h>
 #include <mutex>
 
 
