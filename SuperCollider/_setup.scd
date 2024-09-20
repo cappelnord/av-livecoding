@@ -7,9 +7,11 @@ s.options.inDevice = deviceName;
 s.options.sampleRate = 48000;
 s.options.numOutputBusChannels = 16;
 s.options.numInputBusChannels = 10;
-)
 
 s.reboot;
+
+)
+
 
 
 // Delay of 8-Channel Audio
