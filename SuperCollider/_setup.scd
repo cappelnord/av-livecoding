@@ -6,7 +6,7 @@ s.options.outDevice = deviceName;
 s.options.inDevice = deviceName;
 s.options.sampleRate = 48000;
 s.options.numOutputBusChannels = 16;
-s.options.numInputBusChannels = 8;
+s.options.numInputBusChannels = 10;
 )
 
 s.reboot;
