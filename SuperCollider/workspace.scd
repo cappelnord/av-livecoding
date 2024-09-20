@@ -90,21 +90,11 @@ TempoClock.default.tempo = ~t;
 ~audioFade.value(2, 10);
 
 (
-Ndef(\fmul).quant = 1;
-Ndef(\fmul).fadeTime = 8;
-Ndef(\fmul, {
-	7.collect {
-		DC.kr(1.0);
-	}
-});
-)
-
-(
 Ndef(\bar).quant = 1;
 Ndef(\bar).fadeTime = 8;
 Ndef(\bar, {
 	var sig = 7.collect {|i|
-		var chan = LFPulse.ar(~r * Ndef(\fmul).kr[i] , 0.5, 0.2);
+		var chan = LFPulse.ar(~r , 0.5, 0.2);
 		chan;
 	};
 	sig;
