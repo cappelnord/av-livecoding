@@ -94,7 +94,7 @@ Ndef(\fmul).quant = 1;
 Ndef(\fmul).fadeTime = 8;
 Ndef(\fmul, {
 	7.collect {
-		1;
+		DC.kr(1.0);
 	}
 });
 )
@@ -119,7 +119,7 @@ Ndef(\mix, {
 
 	var sig = bar;
 
-	sig = LPF.ar(sig, 200) * 0.5;
+	sig = LPF.ar(sig, 200) * DC.kr(0.5);
 
 	LeakDC.ar(sig);
 }).play;
