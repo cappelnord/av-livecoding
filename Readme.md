@@ -1,4 +1,4 @@
-# Performance Setup for 46.875;
+# Performance Setup for 46.875
 
 The audio-visual live coding improvisation *46.875* explores SuperCollider audio synthesis to simultaneously shape both sound and visuals. Sound is synthesized and played back to the audience, while for each video frame (typically 60 frames per second), a slice of the generated audio data is uploaded as a texture to the GPU. Using a simple GLSL shader (which will not change throughout the performance), each audio sample is represented as a thin bar with brightness corresponding to its amplitude. Leveraging SuperCollider's multi-channel expansion, multiple audio channels (e.g., seven) are live-coded simultaneously, either diffused separately (one speaker per channel) or mixed down to fewer loudspeakers (e.g., stereo). The visual representations for each audio channel are arranged side by side on the screen.
 
