@@ -83,33 +83,70 @@ TempoClock.default.tempo = ~t;
 };
 )
 
+
+
+
+
+
+
+
+
+
+
+
 // dim the screen a bit
-~screenFade.value(0.75, 6);
+~screenFade.value(0.8, 6);
 
 // push the audio brightness A LOT
 ~audioFade.value(2, 10);
 
 (
-Ndef(\bar).quant = 1;
-Ndef(\bar).fadeTime = 8;
-Ndef(\bar, {
+Ndef(\s1).quant = 4;
+Ndef(\s1).fadeTime = 16;
+Ndef(\s1, {
 	var sig = 7.collect {|i|
-		var chan = LFPulse.ar(~r , 0.5, 0.2);
-		chan;
+		var chan = DC.ar(0);
+		chan * 0.5;
 	};
 	sig;
 });
 )
 
 (
+Ndef(\s2).quant = 4;
+Ndef(\s2).fadeTime = 1;
+Ndef(\s2, {
+	var sig = 7.collect {|i|
+		var chan = DC.ar(0);
+		chan * 0.5;
+	};
+	sig;
+});
+)
+
+(
+Ndef(\s3).quant = 4;
+Ndef(\s3).fadeTime = 0.1;
+Ndef(\s3, {
+	var sig = 7.collect {|i|
+		var chan = DC.ar(0);
+	};
+	sig;
+});
+)
+
+
+
+(
 Ndef(\mix).quant = 1;
-Ndef(\mix).fadeTime = 8;
+Ndef(\mix).fadeTime = 32;
 Ndef(\mix, {
-	var bar = Ndef(\bar).ar(7);
+	var s1 = Ndef(\s1).ar(7);
+	var s2 = Ndef(\s2).ar(7);
+	var s3 = Ndef(\s3).ar(7);
+	var sig;
 
-	var sig = bar;
-
-	sig = LPF.ar(sig, 200) * DC.kr(0.5);
+	sig = s1 + s2 + s3;
 
 	LeakDC.ar(sig);
 }).play;

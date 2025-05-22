@@ -7,11 +7,21 @@ s.options.inDevice = deviceName;
 s.options.sampleRate = 48000;
 s.options.numOutputBusChannels = 16;
 s.options.numInputBusChannels = 10;
+s.options.blockSize = 64;
 
 s.reboot;
 
 )
 
+// Channel Distributions for n Output Channels
+
+// 4 Outputs
+// 0   1   2   3
+// 0 1 2 3 4 5 6
+
+// 6 Outputs
+// 0     1     2     3     4     5
+// 0     1     2  3  4     5     6
 
 
 // Delay of 8-Channel Audio
@@ -35,7 +45,7 @@ Ndef(\test).quant = 1;
 Ndef(\test).fadeTime = 1;
 Ndef(\test, {
 	var sig = 7.collect {|i|
-		var chan = WhiteNoise.ar() * Lag2.ar(LFPulse.ar(0.25, (7-i) * (1/7), 0.01), 0.001);
+		var chan = WhiteNoise.ar() * Lag2.ar(LFPulse.ar(0.25, (7-i) * (1/7), 0.1), 0.001);
 		chan;
 	};
 	sig;
