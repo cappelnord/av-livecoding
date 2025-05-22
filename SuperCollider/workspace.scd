@@ -97,12 +97,12 @@ TempoClock.default.tempo = ~t;
 // dim the screen a bit
 ~screenFade.value(0.8, 6);
 
-// push the audio brightness A LOT
-~audioFade.value(2, 10);
+// push the audio brightness
+~audioFade.value(6, 10);
 
 (
 Ndef(\s1).quant = 4;
-Ndef(\s1).fadeTime = 16;
+Ndef(\s1).fadeTime = 8;
 Ndef(\s1, {
 	var sig = 7.collect {|i|
 		var chan = DC.ar(0);
@@ -114,7 +114,7 @@ Ndef(\s1, {
 
 (
 Ndef(\s2).quant = 4;
-Ndef(\s2).fadeTime = 1;
+Ndef(\s2).fadeTime = 8;
 Ndef(\s2, {
 	var sig = 7.collect {|i|
 		var chan = DC.ar(0);
@@ -126,7 +126,7 @@ Ndef(\s2, {
 
 (
 Ndef(\s3).quant = 4;
-Ndef(\s3).fadeTime = 0.1;
+Ndef(\s3).fadeTime = 8;
 Ndef(\s3, {
 	var sig = 7.collect {|i|
 		var chan = DC.ar(0);
