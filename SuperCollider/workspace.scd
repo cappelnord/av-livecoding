@@ -98,7 +98,11 @@ TempoClock.default.tempo = ~t;
 ~screenFade.value(0.8, 6);
 
 // push the audio brightness
-~audioFade.value(6, 10);
+~audioFade.value(6, 10)
+
+// randomize multichannel cross fades
+MultiChannelFadeModifier.multiplier = {|i| rrand(0.33, 1.0)}
+MultiChannelFadeModifier.reorder = {|x| x.scramble;}
 
 (
 Ndef(\s1).quant = 4;
@@ -130,6 +134,7 @@ Ndef(\s3).fadeTime = 8;
 Ndef(\s3, {
 	var sig = 7.collect {|i|
 		var chan = DC.ar(0);
+		chan * 0.5;
 	};
 	sig;
 });
