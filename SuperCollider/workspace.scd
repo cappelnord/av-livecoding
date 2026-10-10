@@ -104,6 +104,13 @@ TempoClock.default.tempo = ~t;
 MultiChannelFadeModifier.multiplier = {|i| rrand(0.33, 1.0)}
 MultiChannelFadeModifier.reorder = {|x| x.scramble;}
 
+
+(
+Ndef(\x).quant = 1;
+Ndef(\x).fadeTime = 4;
+Ndef(\x, { DC.kr(0) });
+)
+
 (
 Ndef(\s1).quant = 4;
 Ndef(\s1).fadeTime = 8;
